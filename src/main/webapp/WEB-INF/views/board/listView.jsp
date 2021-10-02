@@ -38,7 +38,7 @@
 
    
       <c:if test="${readTitle ne null}">s
-      <%if(session.getAttribute("id") == null) {%>
+      <%if(session.getAttribute("id") == "admin") {%>
        		<div class="writeQu" style="cursor:pointer;">항목 추가</div>
        		<%} %>
          <div class="totalcounts">총<b><c:out value="${totalBnoCount}"/></b>개</div>
@@ -49,7 +49,7 @@
            </li>
             <li class="question" id="qu_name">
             <c:if test="${none != 1000}">
-            <%if(session.getAttribute("id") == null) {%>
+            <%if(session.getAttribute("id") == "admin") {%>
             <div class="update_btn" style="cursor:pointer;" value="${readTitle.bno}">(수정/ </div>
             <div class="delete_btn" style="cursor:pointer;" value="${readTitle.bno}">삭제)</div>
             <%} %>
