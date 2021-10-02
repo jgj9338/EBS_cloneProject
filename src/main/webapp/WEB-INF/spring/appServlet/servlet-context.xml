@@ -23,6 +23,14 @@
 	
 	<context:component-scan base-package="com.kgitbank.ebs" />
 	
+	<!-- FAQ -->
+	<context:component-scan base-package="com.green.ebs" />
+	<context:component-scan base-package="com.green.controller" />
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	<!-- FAQ -->
 	
 	
 </beans:beans>
