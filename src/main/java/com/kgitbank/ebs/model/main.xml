@@ -19,6 +19,6 @@
 </insert>
 <!-- FAQ -->
 <select id="faqList" resultType="FaqDTO">
-	select * from faqBoard order by readcount desc
+	<![CDATA[select * from faq_table where readcount > 8 order by readcount desc]]>
 </select>
 </mapper>
