@@ -26,7 +26,7 @@
 	border-width: 1px;
 	
 }
-.tab > li > a{
+.tab > li > span{
 	color : #a5a5a5;
 	padding-top: 6px;
 	padding-bottom: 4px;
@@ -48,6 +48,7 @@
 list-style: none;
 padding-bottom: 0px;
 padding-left: 0px;
+margin : 0px;
 }
 li.question{
 list-style: none; float:left;
@@ -66,6 +67,7 @@ padding-left: 25%;
 	margin-top: 2%;
 	margin-left: 15%;
 	margin-right: 15%;
+	margin-bottom : 5%;
 }
 .whereami{
 	background: #2580eb;

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.mapper.BoardMapper">
+	
+	<select id="Faqlist" resultType="com.green.vo.BoardVO">
+		select * from faq_table
+	</select>
+	
+	<select id="Faqfavorite" resultType="com.green.vo.BoardVO">
+		select category, cno, question, answer, bno, rNum, readcount 
+		from(select category, cno, question, answer, bno, readcount, row_number() over(order by bno asc) as rNum from faq_table where 1=1
+		<include refid="Faqsearch"></include> and <![CDATA[readcount > 15) order by bno desc]]>
+	</select>
+	
+	<select id="FaqlistCategory" resultType="com.green.vo.BoardVO">
+		select distinct category, cno from faq_table order by cno asc
+	</select>
+	
+	<select id="FaqreadTitle" resultType="com.green.vo.BoardVO">
+	 select category, cno, question, answer, bno, rNum ,readcount
+	 from(select category, cno, question, answer, bno, readcount, row_number() over(order by bno asc) as rNum from faq_table where 1=1
+	 <include refid="Faqsearch"></include> and cno = #{cno}) 
+	 order by bno desc
+	</select>
+	
+	<select id="FaqtotalBnoCount" resultType="int" parameterType="int">
+		select count(bno) from faq_table where 1=1 <include refid="Faqsearch"></include> and cno=#{cno}
+	</select>
+	
+	<select id="FaqFavoriteTotalBnoCount" resultType="int" parameterType="int">
+		select count(bno) from faq_table where 1=1 <include refid="Faqsearch"></include> and readcount > 15
+	</select>
+ 
+	<sql id="Faqsearch">
+	<if test="keyword != null">
+		and answer like '%' || #{keyword} || '%'
+	</if> 
+	</sql>
+	
+	<insert id="FaqnewQuestion">
+		insert into faq_table (category, cno, question, answer, bno) values(#{category}, #{cno}, #{question}, #{answer}, seq_faq.nextval) 
+	</insert>
+
+	<select id="FaqupdateView" resultType="com.green.vo.BoardVO">
+		select category, question, answer, cno, bno from faq_table where 1=1 and cno=#{cno} and bno=#{bno}
+	</select>
+	<delete id="Faqdelete">
+		delete faq_table where 1=1 and cno = #{cno} and bno = #{bno}
+	</delete>
+	<update id="Faqupdate">
+		update faq_table set question=#{question}, answer=#{answer}
+		where 1=1 and cno=#{cno} and bno=#{bno}
+	</update>
+	
+	<update id="Faqreadcount">
+		update faq_table set readcount = readcount +1 where 1=1 and cno =#{cno} and bno=#{bno} 
+	</update>
+	
+</mapper>

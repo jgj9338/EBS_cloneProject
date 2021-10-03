@@ -59,6 +59,7 @@ public class BoardController {
 		model.addAttribute("readTitle", service.FaqreadTitle(vo.getCno(), keyword));
 		model.addAttribute("totalBnoCount", service.FaqtotalBnoCount(vo.getCno(), keyword));
 		} else {
+		model.addAttribute("none", "1000");
 		model.addAttribute("readTitle", service.Faqfavorite());
 		model.addAttribute("totalBnoCount", service.FaqFavoriteTotalBnoCount(vo.getCno(), keyword));
 		}

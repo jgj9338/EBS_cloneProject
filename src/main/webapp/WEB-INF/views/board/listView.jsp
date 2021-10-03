@@ -12,7 +12,7 @@
 <title>FAQ</title>
 <%@include file="../include/header.jsp" %>
 </head>
-<body>
+<body class="aja">
 <div class="whereami">
 	<div class="content">
 		<ul class = "hometext">
@@ -32,12 +32,14 @@
 	</div>
    <ul class="tab">
    <c:forEach items="${listCategory}" var="listCategory" >
-   		<li id="act_bt"><a href="/board/list?cno=${listCategory.cno}">${listCategory.category}</a></li>
+   		<li id="act_bt"><input type="hidden" name="ajacno" class="ajacno" value="${listCategory.cno}">
+   		<span class="act_B"  style="cursor:pointer;" id="${listCategory.cno}">${listCategory.category}</span>
+   		</li>
    </c:forEach>
    </ul>
 
-   
-      <c:if test="${readTitle ne null}">s
+
+      <c:if test="${readTitle ne null}">
       <%if(session.getAttribute("id") == "admin") {%>
        		<div class="writeQu" style="cursor:pointer;">항목 추가</div>
        		<%} %>
@@ -57,7 +59,7 @@
             
           
             <c:out value="${readTitle.category}"/></li>
-            <li class="hidden_btn" id="qu_qu" style="cursor:pointer;"><c:out value="${readTitle.question}"/> 현재 조회수:/${readTitle.readcount}
+            <li class="hidden_btn" id="qu_qu" style="cursor:pointer;"><c:out value="${readTitle.question}"/>
             <input type="hidden" name="hiddencno" id="hiddencno" value="${readTitle.cno}">
             <input type="hidden" name="hiddenbno" id="hiddenbno" value="${readTitle.bno}">
            	<input type="hidden" name="hiddenreadcount" id="hiddenreadcount" value="${readTitle.readcount}">

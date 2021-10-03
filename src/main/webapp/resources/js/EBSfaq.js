@@ -107,10 +107,21 @@ $(".cancelenter").keydown(function() {
 		formca.submit();
 		
 	})
-
+	
+$(".act_B").on("click", function(){
+      var ajcno = $(this).siblings(".ajacno").val();
+        $(".aja").load("/board/list?cno="+ajcno)
+		$(this).parent().addClass("active");
+		$(this).parent().siblings().removeClass("active");
+   })
 
 
 
 })
+
+	
+
+
+
 
   
